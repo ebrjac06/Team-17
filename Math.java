@@ -9,4 +9,5 @@ public class Math {
     public int Power(int base, int exponent) {
         return (int) Math.pow(base, exponent);
     }
+    // bipop
 }
