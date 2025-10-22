@@ -40,6 +40,9 @@ University ID: 240207029
     public int Power(int base, int exponent) {
         return (int) Math.pow(base, exponent);
     }
+
+    // try
+
         /********************************
     Developer: Jacob Ebrada
     University ID: 240364687
@@ -56,4 +59,5 @@ University ID: 240207029
     public int Divide(int num1 int num2){
         return (num1num2);
     }
+
 }
