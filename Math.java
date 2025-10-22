@@ -40,4 +40,20 @@ University ID: 240207029
     public int Power(int base, int exponent) {
         return (int) Math.pow(base, exponent);
     }
+        /********************************
+    Developer: Jacob Ebrada
+    University ID: 240364687
+    Function: This function takes two inputs as integers and returns the mulitplication
+    ********************************/
+    public int Multi(int num1, int num2){
+        return (num1*num2);
+    }
+    /********************************
+    Developer: Jacob Ebrada
+    University ID: 240364687
+    Function: This function takes two inputs as integers and returns the division
+    ********************************/
+    public int Divide(int num1 int num2){
+        return (num1num2);
+    }
 }
