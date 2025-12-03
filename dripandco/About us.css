@@ -1,0 +1,24 @@
+
+#about {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  
+}
+
+#about div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img_r{
+  
+  width: 25%;
+  height: 25%;
+}
+.img_l{
+  
+  width: 25%;
+  height: 25%;
+}
