@@ -1,5 +1,7 @@
+<!--------------------------------------BASKET PAGE START--------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
+<!--------------------------------------Links for Basket Page Start--------------------------------------->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,75 +9,91 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="Index.css">
 </head>
+<!--------------------------------------Links for Basket Page End--------------------------------------->
+
 
 <body>
-<header>
-  <div class="logo"><a href="Home Page.html"><img src="Drip&Co Logo.png" width="152" height="71" style="width:70px;height:50px;"></a></div>
-  <div class="search-box">
-    <input type="text" placeholder="Search">
-  </div>
-   <div class="icons">
-  <a href="">
-    <img src="https://media.istockphoto.com/id/1433268430/vector/favorite-icon.jpg?s=612x612&w=0&k=20&c=an0bIbEd-o5B4Lhc1i-alApeUnFopvIoiyIQFwKcCgs=" style="width: 35px; height: 35px;">
-  </a>
-
-  <a href="Basket Page.html">
-    <img src="https://media.istockphoto.com/id/2206624277/vector/picnic-basket-vector-icon-design-illustration.jpg?s=612x612&w=0&k=20&c=YDUdNaBUc2UTJ0NNJidVQ-aBFZANsU_FsLue7fnm4Mo=" style="width: 35px; height: 35px;">
-  </a>
-
-  <a href="Signup.html">
-    <img src="https://media.istockphoto.com/id/1317551894/vector/account-avatar-member-person-profle-user-icon-eps-vector.jpg?s=612x612&w=0&k=20&c=5YcHVMGR1ur6uZ_t3uAjKZoapyFuaN1eWFYcHFseEPM=" style="width: 35px; height: 35px;">
-  </a>
-</div>
-</header>
-<nav> <a href="Mens page.html">Mens</a> <a href="Womens Page.html">Womens</a> <a href="Contact us.html">Contact Us</a> <a href="About us.html">About Us</a> </nav>
-<div class="basket-container">
-  <div class="basket-title">Your Basket</div>
-  <div class="basket-item"> <img src="Male model.png" alt="Item">
-    <div class="item-info">
-      <h3>Black Hoodie</h3>
-      <p>Size: Medium</p>
-      <select class="qty-select">
-        <option>1</option>
-        <option>2</option>
-      </select>
+<!--------------------------------------Basket Layout Start--------------------------------------->
+  <div id="header"></div>
+  <div class="basket-container">
+    <div class="basket-title">Your Basket</div>
+    <div id="basket-items"></div>
+    <div class="summary-box">
+      <div class="summary-row"> <span>Subtotal:</span> <strong id="subtotal">£0.00</strong> </div>
+      <div class="summary-row"> <span>Delivery:</span> <strong>TBD</strong> </div>
+      <div class="summary-row"> <span>Total:</span> <strong id="total">£0.00</strong> </div>
+      <button class="checkout-btn" onclick="window.location.href='Checkout.html'">Checkout</button>
     </div>
-    <div class="item-price">£39.99</div>
-    <div class="remove-btn"><i class="fa fa-trash"></i></div>
   </div>
-  <div class="basket-item"> <img src="FemaleModel.png" alt="Item">
-    <div class="item-info">
-      <h3>Oversized Cream Sweater</h3>
-      <p>Size: Small</p>
-      <select class="qty-select">
-        <option>1</option>
-        <option>2</option>
-      </select>
-    </div>
-    <div class="item-price">£29.99</div>
-    <div class="remove-btn"><i class="fa fa-trash"></i></div>
-  </div>
-  <div class="summary-box">
-    <div class="summary-row"> <span>Subtotal</span> <strong>£69.98</strong> </div>
-    <div class="summary-row"> <span>Delivery</span> <strong>£4.99</strong> </div>
-    <div class="summary-row"> <span>Total</span> <strong>£74.97</strong> </div>
-    <button class="checkout-btn">
-    <a  class="Checkout" href="Checkout.html">
-    <p style="color: black">Checkout</p>
-    </a>
-    </button>
-  </div>
-</div>
-<footer>
-  <div class="social-icons"> <a href="https://www.snapchat.com/" class="fa fa-snapchat"></a> <a href="https://www.instagram.com/" class="fa fa-instagram"></a> <a href="https://twitter.com/" class="fa fa-twitter"></a> </div>
-  <div>About Us<br>
-    Contact Us</div>
-  <div>Terms of use<br>
-    Terms of sale<br>
-    All rights reserved</div>
-  <div>Accessibility<br>
-    Modern Slavery Act<br>
-    Privacy and cookies policy</div>
-</footer>
+  <div id="footer"></div>
+<!--------------------------------------Basket Layout End--------------------------------------->
+
+  <script>
+/*--------------------------------------Header and Footer Script Start---------------------------------------*/
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+/*--------------------------------------Header and Footer Script End---------------------------------------*/
+
+/*--------------------------------------Basket Java Script Start---------------------------------------*/
+/*--------------------------------------Loading the data for the Basket Start---------------------------------------*/
+      function renderBasket() {
+        const basket = JSON.parse(localStorage.getItem('basket')) || [];
+        const basketItemsDiv = document.getElementById('basket-items');
+        basketItemsDiv.innerHTML = '';
+/*--------------------------------------Loading the data for the Basket End---------------------------------------*/
+/*--------------------------------------Total, Subtotal and Basket Items Start---------------------------------------*/
+        let subtotal = 0;
+        basket.forEach((item, index) => {
+          subtotal += item.price * item.quantity;
+
+          basketItemsDiv.innerHTML += `
+            <div class="basket-item">
+              <img src="${item.img}" alt="Item">
+              <div class="item-info">
+                <h3>${item.name}</h3>
+                <p>Size: ${item.size}</p>
+                <select class="qty-select" data-index="${index}">
+                  ${[...Array(10).keys()].map(i => `<option ${item.quantity === i+1 ? 'selected' : ''}>${i+1}</option>`).join('')}
+                </select>
+              </div>
+              <div class="item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+              <div class="remove-btn" data-index="${index}"><i class="fa fa-trash"></i></div>
+            </div>
+          `;
+        });
+
+        document.getElementById('subtotal').innerText = `£${subtotal.toFixed(2)}`;
+        document.getElementById('total').innerText = `£${subtotal.toFixed(2)}`;
+/*--------------------------------------Total, Subtotal and Basket Items End---------------------------------------*/
+/*--------------------------------------Adjust Item Quantities (Including Removing Items) Start---------------------------------------*/
+        document.querySelectorAll('.qty-select').forEach(select => {
+          select.addEventListener('change', (e) => {
+            const idx = e.target.getAttribute('data-index');
+            basket[idx].quantity = parseInt(e.target.value);
+            localStorage.setItem('basket', JSON.stringify(basket));
+            renderBasket();
+          });
+        });
+
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const idx = e.currentTarget.getAttribute('data-index');
+            basket.splice(idx, 1);
+            localStorage.setItem('basket', JSON.stringify(basket));
+            renderBasket();
+          });
+        });
+      }
+/*--------------------------------------Adjust Item Quantities (Including Removing Items) End---------------------------------------*/
+      renderBasket();
+/*--------------------------------------Basket Java Script End---------------------------------------*/
+  </script>
 </body>
 </html>
+<!--------------------------------------BASKET PAGE END--------------------------------------->
+
