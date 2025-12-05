@@ -1,0 +1,74 @@
+/* Title */
+.contact-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: #002333;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+/* Form Container */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.contact-box {
+    width: 70%;
+    max-width: 700px;
+    background: #dcefe9; 
+    padding: 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Two-column row */
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-box input,
+.contact-box textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+textarea {
+    height: 110px;
+    resize: none;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #002333;
+}
+
+/* Submit Button */
+.submit-btn {
+    background: #003b49;
+    color: white;
+    padding: 12px;
+    border: none;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background: #002f3a;
+}

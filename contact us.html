@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Drip & Co</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Contact page CSS -->
+    <link rel="stylesheet" href="contact.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <!-- common header for all pages --> 
+    <div id="header"></div>
+
+<!-- PAGE TITLE -->
+<h1 class="contact-title">Contact Us</h1>
+
+<!-- CONTACT FORM -->
+<div class="contact-container">
+    <form id="contactForm" action="contact_form.php" method="POST" novalidate class="contact-box">
+
+        <div class="row">
+            <div class="input-group">
+                <label>First Name*</label>
+                <input type="text" name="first_name" required pattern="^[A-Za-z]+$" required title="First name can only contain letters" placeholder="First name">
+            </div>
+
+            <div class="input-group">
+                <label>Last Name*</label>
+                <input type="text" name="last_name" required pattern="^[A-Za-z]+$" required title="Last name can only contain letters" placeholder="Second name">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Email Address*</label>
+            <input type="email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.uk|net|org|ac\.uk)$" title="Please enter a valid email" placeholder="example@gmail.com">
+        </div>
+
+        <div class="input-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" maxlength="20" pattern="^\+?[0-9\s\-()]{10,20}$" title="Please enter a valid phone number" placeholder="eg. 07123456789">
+        </div>
+
+        <div class="input-group">
+            <label>Message*</label>
+            <textarea name="message" required placeholder="Please enter a message..." ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">SUBMIT</button>
+
+    </form>
+</div>
+
+
+    <div id="footer"></div>
+
+    <script src="contact.js"></script>
+    <script>
+        // Load header
+        fetch("header.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("header").innerHTML = data);
+
+        // Load footer
+        fetch("footer.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+    
+
+</body>
+</html>
