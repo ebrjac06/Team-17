@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drip And Co</title>
+    <link rel="stylesheet" href="Index.css">
+    <link rel="stylesheet" href="About us.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="search.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <section id="about">
+            <h1>About Us</h1>
+            <div>
+                <img src="images/clothes_rack.png" alt="" class="img_l">
+                <br>
+                <p>
+                    Drip And Co is a youth-focused clothing label creating simple, trendy, and affordable pieces for teens and young adults. We blend contemporary streetwear influences with timeless basics to deliver comfortable, durable garments designed for everyday life — all made with care and attention to detail.
+                </p>
+            </div>
+            <br>
+            <div>
+                <p>
+                    At Drip And Co, our culture is centred on creativity, inclusivity, and responsible growth. We design with intention, prioritising sustainable materials and fair manufacturing practices while crafting quality pieces that last. We celebrate individuality and diverse voices, listen to our community, and foster a workplace where collaboration, curiosity, and respect guide every decision.
+                </p>
+                <img src="images/customers.png" alt="" class="img_r">
+            </div>
+            <br>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        fetch("header.php")
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById("header").innerHTML = data;
+            
+            if (typeof initDarkMode === 'function') {
+              initDarkMode();
+            }
+          });
+
+        fetch("footer.html")
+          .then(res => res.text())
+          .then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+    <script src="search.js"></script>
+    <script src="darkmode.js"></script>
+
+</body>
+</html>
