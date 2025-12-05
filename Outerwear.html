@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drip & Co – Collections</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="Outerwear.css">
+  <link rel="stylesheet" href="Index.css">
+  <link rel="stylesheet" href="search.css">
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <div class="collection-header">
+      <h1 class="collection-title">Outerwear (5)</h1>
+      <div class="sort-dropdown">
+        <label>Sort By</label>
+        <select>
+          <option>Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="collection-layout">
+      <aside class="filter-panel">
+        <h2>Filter</h2>
+
+        <form class="filter-form">
+          <div class="filter-group">
+            <h3>Categories</h3>
+            <label><input type="checkbox"> Jackets</label>
+            <label><input type="checkbox"> Hoodies</label>
+            <label><input type="checkbox"> Coats</label>
+            <label><input type="checkbox"> Gilets</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Size</h3>
+            <label><input type="checkbox"> XS</label>
+            <label><input type="checkbox"> S</label>
+            <label><input type="checkbox"> M</label>
+            <label><input type="checkbox"> L</label>
+            <label><input type="checkbox"> XL</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Colour</h3>
+            <label><input type="checkbox"> Black</label>
+            <label><input type="checkbox"> Grey</label>
+            <label><input type="checkbox"> Blue</label>
+            <label><input type="checkbox"> Green</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Price</h3>
+            <div class="price-row">
+              <input type="number" placeholder="£ min">
+              <span>–</span>
+              <input type="number" placeholder="£ max">
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button type="button" class="btn-clear">Clear</button>
+            <button type="button" class="btn-apply">Filter</button>
+          </div>
+        </form>
+      </aside>
+
+      <section class="categories">
+        <div class="card">
+          <div class="img">
+            <a href="Puffer Jacket.html">
+              <img
+                src="https://cdn11.bigcommerce.com/s-k63dsgx98h/images/stencil/960w/products/16670/166337/b2101671-7647-4b89-af3f-a868a506868e__10811.1763631180.jpg?c=3"
+                style="width: 100%; height: 100%;">
+            </a>
+          </div>
+          <h3 class="product-name">Black Puffer Jacket</h3>
+          <p class="product-desc">Warm padded jacket with hood and front zip.</p>
+          <p class="product-price">£55.00</p>
+        </div>
+
+      <div class="card">
+  <div class="img">
+    <a href="raincoat.html">
+      <img src="images/raincoat.png" style="width: 100%; height: 100%;">
+    </a>
+  </div>
+  <h3 class="product-name">Raincoat</h3>
+  <p class="product-desc">Lightweight waterproof coat for wet weather.</p>
+  <p class="product-price">£40.00</p>
+</div>
+
+
+
+        <div class="card">
+          <div class="img">
+            <img src="images/bomberJ.png" style="width: 100%; height: 100%;">
+          </div>
+          <h3 class="product-name">Bomber Jacket</h3>
+          <p class="product-desc">Classic bomber style with ribbed cuffs.</p>
+          <p class="product-price">£60.00</p>
+        </div>
+
+        <div class="card">
+          <div class="img">
+            <img src="images/sweater.png" style="width: 100%; height: 100%;">
+          </div>
+          <h3 class="product-name">Sweatshirt</h3>
+          <p class="product-desc">Soft cotton sweatshirt for everyday wear.</p>
+          <p class="product-price">£35.00</p>
+        </div>
+
+        <div class="card">
+          <div class="img">
+            <img src="images/hoodie.png" style="width: 100%; height: 100%;">
+          </div>
+          <h3 class="product-name">Hoodie</h3>
+          <p class="product-desc">Casual hoodie with kangaroo pocket.</p>
+          <p class="product-price">£45.00</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script>
+    fetch("header.php")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header").innerHTML = data;
+        
+        if (typeof initDarkMode === 'function') {
+          initDarkMode();
+        }
+      });
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+  </script>
+  <script src="search.js"></script>
+  <script src="darkmode.js"></script>
+
+</body>
+
+</html>
