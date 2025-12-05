@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drip And Co - Checkout</title>
+  <link rel="stylesheet" href="Checkout.css">
+  <link rel="stylesheet" href="Index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="search.css">
+</head>
+
+<body>
+  <div id="header"></div>
+  <h1 class="checkout-title">Checkout</h1>
+
+  <section id="checkout">
+    <div class="checkout-left">
+      <form id="checkout_form">
+        <fieldset>
+          <h2>Contact</h2>
+          <label for="email">Email*</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+          <label for="phone">Phone number</label>
+          <input type="text" id="phone" name="phone" placeholder="07123 456789">
+        </fieldset>
+
+        <fieldset>
+          <h2>Payment method</h2>
+          <label for="ccnum">Card number*</label>
+          <input type="text" id="ccnum" name="cardnumber" placeholder="1234 5678 9012 3456" required>
+
+          <label for="cvv">Security code (CVV)*</label>
+          <input type="text" id="cvv" name="cvv" placeholder="123" required>
+
+          <label for="expmonth">Expiration date (MM/YY)*</label>
+          <input type="text" id="expmonth" name="expmonth" placeholder="08/27" required>
+
+          <label for="cname">Name on card</label>
+          <input type="text" id="cname" name="cardname" placeholder="John Smith">
+        </fieldset>
+
+        <fieldset>
+          <h2>Shipping Address</h2>
+          <input type="text" id="shipAdr" name="shipAdr" placeholder="123 Example Street, London" required>
+
+          <h2>Billing Address</h2>
+          <input type="text" id="billAdr" name="billAdr" placeholder="Same as shipping or enter address">
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="checkout-right">
+      <h2>Items</h2>
+      <div id="checkout-items"></div>
+
+      <div class="delivery-box">
+        <h3>Delivery</h3>
+
+        <label class="delivery-option">
+          <input type="radio" name="delivery" value="4.99" checked>
+          Standard Delivery — £4.99
+        </label>
+
+        <label class="delivery-option">
+          <input type="radio" name="delivery" value="9.99">
+          Fast Delivery — £9.99
+        </label>
+      </div>
+
+      <div class="total-row">
+        <span>Total</span>
+        <span id="checkout-total">£0.00</span>
+      </div>
+
+      <button type="submit" class="checkout-button" form="checkout_form">
+        Purchase
+      </button>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script>
+    fetch("header.php")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header").innerHTML = data;
+        
+        if (typeof initDarkMode === 'function') {
+          initDarkMode();
+        }
+      });
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+
+    function renderCheckout() {
+      const basket = JSON.parse(localStorage.getItem('basket')) || [];
+      const checkoutItemsDiv = document.getElementById('checkout-items');
+      checkoutItemsDiv.innerHTML = '';
+      let itemsTotal = 0;
+
+      if (basket.length === 0) {
+        checkoutItemsDiv.innerHTML =
+          '<p style="padding:10px;color:#333;">Sadly, your basket is currently empty :( </p>';
+      } else {
+        basket.forEach(item => {
+          itemsTotal += item.price * item.quantity;
+          const itemRow = document.createElement('div');
+          itemRow.className = 'item-row';
+          itemRow.innerHTML = `
+            <div class="item-image">
+              <img src="${item.img}" alt="${item.name}"
+                   style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div class="item-text">${item.name} (${item.size}) x ${item.quantity}</div>
+            <div class="item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+          `;
+          checkoutItemsDiv.appendChild(itemRow);
+        });
+      }
+      updateTotal(itemsTotal);
+    }
+
+    function updateTotal(itemsTotal) {
+      const deliveryInput = document.querySelector('input[name="delivery"]:checked');
+      const delivery = deliveryInput ? parseFloat(deliveryInput.value) : 0;
+      const finalTotal = itemsTotal > 0 ? itemsTotal + delivery : 0;
+      document.getElementById('checkout-total').innerText =
+        `£${finalTotal.toFixed(2)}`;
+    }
+
+    document.addEventListener('change', function (e) {
+      if (e.target && e.target.name === "delivery") {
+        const basket = JSON.parse(localStorage.getItem('basket')) || [];
+        const itemsTotal = basket.reduce(
+          (sum, it) => sum + (it.price * it.quantity), 0
+        );
+        updateTotal(itemsTotal);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', renderCheckout);
+  </script>
+
+  <script src="search.js"></script>
+  <script src="darkmode.js"></script>
+</body>
+</html>
