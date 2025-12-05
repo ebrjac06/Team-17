@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drip & Co</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="Index.css">
+<link rel="stylesheet" href="search.css">
+</head>
+
+<body>
+  <div id="header"></div>
+
+  <p class="Title">Mens</p>
+  <section class="categories">
+    <div class="card">Outerwear <a href="Outerwear.html">
+      <div class="img"><img src="images/outerwear.jpg" style="width: 100%; height: 100%;"></div>
+      </a> 
+    </div>
+    <div class="card">Innerwear <a href="Mens page.html">
+      <div class="img"><img src="images/vest.jpeg" style="width: 100%;height: 100%;"></div>
+      </a> 
+    </div>
+    <div class="card">T-shirts and Tops <a href="Mens page.html">
+      <div class="img"><img src="images/shirts.jpeg" style="width: 100%;height: 100%;"></div>
+      </a> 
+    </div>
+    <div class="card">Bottoms <a href="Mens page.html">
+      <div class="img"><img src="images/joggers.jpeg" style="width: 100%;height: 100%;"></div>
+      </a> 
+    </div>
+    <div class="card">Accessories <a href="Mens page.html">
+      <div class="img"><img src="images/accessories.webp" style="width: 100%;height: 100%;"></div>
+      </a> 
+    </div>
+  </section>
+  
+  <div id="footer"></div>
+
+  <script>
+    fetch("header.php")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header").innerHTML = data;
+        
+        if (typeof initDarkMode === 'function') {
+          initDarkMode();
+        }
+      });
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("footer").innerHTML = data);
+  </script>
+  <script src="search.js"></script>
+  <script src="darkmode.js"></script>
+</body>
+</html>
